@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        KC_TRTT,KC_TLTT,KC_SPCFUN,    KC_ENTFUN,KC_RIGHT_ALT, KC_RIGHT_CTRL
   //                  `----+----+----'        `----+----+----'
   ),
-  
+
   [_COLEMAKMAC] = LAYOUT(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
   KC_ESC, KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_BSPC,
@@ -71,9 +71,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      KC_RIGHT_CTRL, KC_A  , KC_R  , KC_S  , KC_T  , KC_D  ,                KC_H  , KC_N  , KC_E  , KC_I  , KC_O  ,KC_QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     KC_LSFT, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  , KC_SPCFUN ,KC_ENTFUN, KC_K  , KC_M  ,KC_COMM, KC_DOT,KC_SLSH,KC_RSFT,
+     KC_LSFT, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  , KC_SPCFUNMAC ,KC_ENTFUNMAC, KC_K  , KC_M  ,KC_COMM, KC_DOT,KC_SLSH,KC_RSFT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       KC_TRTT,KC_TLTT,KC_SPCFUN,    KC_ENTFUN,KC_RIGHT_ALT, KC_LGUI
+                       KC_TRTT,KC_TLTT,KC_SPCFUNMAC,    KC_ENTFUNMAC,KC_RIGHT_ALT, KC_LGUI
   //                  `----+----+----'        `----+----+----'
   ),
 
