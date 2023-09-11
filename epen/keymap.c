@@ -14,10 +14,15 @@ extern keymap_config_t keymap_config;
 enum custom_keycodes {
   // normal keys, default layer
   COLEMAK = SAFE_RANGE,
+  // normal keys for mac mode
+  // get into mac mode by using LSHIFT+RSHIFT+2 (magic command feature)
+  COLEMAKMAC,
   // lower layer
   LOWER,
   // fn layer
   FUNL,
+  // fn layer for mac mode
+  FUNLMAC,
 };
 
 
@@ -43,10 +48,16 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KC_LEFTWORD LCTL(KC_LEFT)
 #define KC_RIGHTWORD LCTL(KC_RIGHT)
 
+#define KC_LEFTWORDMAC LALT(KC_LEFT)
+#define KC_RIGHTWORDMAC LALT(KC_RIGHT)
+
 #define KC_SPCFUN LT(_FUNL,KC_SPC) //space on tap, fn when held
 #define KC_ENTFUN LT(_FUNL,KC_ENT) //enter on tap, fn when held
 #define KC_TLTT MO(_LOWER)
 #define KC_TRTT LM(_LOWER, MOD_LSFT)
+
+#define KC_SPCFUNMAC LT(_FUNLMAC,KC_SPC) //space on tap, fn when held for mac mode
+#define KC_ENTFUNMAC LT(_FUNLMAC,KC_ENT) //enter on tap, fn when held for mac mode
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -61,6 +72,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      LSFT, Z  , X  , C  , V  , B  , SPCFUN ,ENTFUN, K  , M  ,COMM, DOT,SLSH,RSFT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                        TRTT,TLTT,SPCFUN,    ENTFUN,RALT, RCTRL
+  //                  `----+----+----'        `----+----+----'
+  ),
+
+  [_COLEMAKMAC] = LAYOUT_kc(
+  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+  CLOSE, 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  ,BSPC,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     TAB , Q  , W  , F  , P  , G  ,                J  , L  , U  , Y  ,SCLN,BSLS,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     RCTRL, A  , R  , S  , T  , D  ,                H  , N  , E  , I  , O  ,QUOT,
+  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+     LSFT, Z  , X  , C  , V  , B  , SPCFUNMAC ,ENTFUNMAC, K  , M  ,COMM, DOT,SLSH,RSFT,
+  //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
+                       TRTT,TLTT,SPCFUNMAC,    ENTFUNMAC,RALT, LGUI
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -84,7 +109,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      ___ ,F11, F12, PGUP, NO, NO ,                  NO,  NO,  UP, NO,  NO, INS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-  ___,LEFTPANE,HOME,PGDN,END,RIGHTPANE,      LEFTWORD,LEFT,DOWN,RGHT,RIGHTWORD,NO,
+     ___,NO,   HOME, PGDN, END,NO,            LEFTWORD,LEFT,DOWN,RGHT,RIGHTWORD,NO,
+  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+     ___, ___, ___, ___, ___, ___, ___,       ___,___ , ___, ___, ___, ___, ___,
+  //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
+                       ___, ___, ___,          ___, ___, ___
+  //                  `----+----+----'        `----+----+----'
+  ),
+
+   [_FUNLMAC] = LAYOUT_kc(
+  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+     ___ , F1 , F2 , F3 , F4 , F5 ,                 F6,  F7,  F8,  F9, F10,PSCR,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     ___ ,F11, F12, PGUP, NO, NO ,                  NO,  NO,  UP, NO,  NO, INS,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     ___,NO,   HOME, PGDN, END,NO,            LEFTWORDMAC,LEFT,DOWN,RGHT,RIGHTWORDMAC,NO,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
      ___, ___, ___, ___, ___, ___, ___,       ___,___ , ___, ___, ___, ___, ___,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
