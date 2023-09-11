@@ -1,16 +1,17 @@
-#include "iris.h"
-#include "action_layer.h"
-#include "eeconfig.h"
+//#include "iris.h"
+//#include "action_layer.h"
+//#include "eeconfig.h"
+
+#include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
 
-//keycode shorthands
-#define KC____  KC_TRNS // three underscores "___" for transparent
-
 //define layer names
 #define _COLEMAK 0
-#define _LOWER 1
-#define _FUNL 2
+#define _COLEMAKMAC 1
+#define _LOWER 2
+#define _FUNL 4
+#define _FUNLMAC 8
 enum custom_keycodes {
   // normal keys, default layer
   COLEMAK = SAFE_RANGE,
@@ -26,20 +27,6 @@ enum custom_keycodes {
 };
 
 
-
-//Tap Dance Declarations
-#define KC_CLOSEPANE LCTL(KC_F4)
-enum {
-  TD_ESC_CLOSETAB = 0
-};
-
-//Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-  //Tap once for Esc, twice for ctrl f4
-  [TD_ESC_CLOSETAB] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CLOSEPANE)
-// Other declarations would go here, separated by commas, if you have them
-};
-#define KC_CLOSE TD(TD_ESC_CLOSETAB)
 
 
 #define KC_LEFTPANE LSFT(LCTL(KC_TAB))
@@ -61,73 +48,73 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-	[_COLEMAK] = LAYOUT_kc(
+	[_COLEMAK] = LAYOUT(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-  CLOSE, 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  ,BSPC,
+  KC_ESC, KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_BSPC,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB , Q  , W  , F  , P  , G  ,                J  , L  , U  , Y  ,SCLN,BSLS,
+     KC_TAB , KC_Q  , KC_W  , KC_F  , KC_P  , KC_G  ,                KC_J  , KC_L  , KC_U  , KC_Y  ,KC_SCLN,KC_BSLS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LGUI, A  , R  , S  , T  , D  ,                H  , N  , E  , I  , O  ,QUOT,
+     KC_LGUI, KC_A  , KC_R  , KC_S  , KC_T  , KC_D  ,                KC_H  , KC_N  , KC_E  , KC_I  , KC_O  ,KC_QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LSFT, Z  , X  , C  , V  , B  , SPCFUN ,ENTFUN, K  , M  ,COMM, DOT,SLSH,RSFT,
+     KC_LSFT, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  , KC_SPCFUN ,KC_ENTFUN, KC_K  , KC_M  ,KC_COMM, KC_DOT,KC_SLSH,KC_RSFT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       TRTT,TLTT,SPCFUN,    ENTFUN,RALT, RCTRL
+                       KC_TRTT,KC_TLTT,KC_SPCFUN,    KC_ENTFUN,KC_RIGHT_ALT, KC_RIGHT_CTRL
   //                  `----+----+----'        `----+----+----'
   ),
 
-  [_COLEMAKMAC] = LAYOUT_kc(
+  [_COLEMAKMAC] = LAYOUT(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-  CLOSE, 1  , 2  , 3  , 4  , 5  ,                6  , 7  , 8  , 9  , 0  ,BSPC,
+  KC_ESC, KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_BSPC,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB , Q  , W  , F  , P  , G  ,                J  , L  , U  , Y  ,SCLN,BSLS,
+     KC_TAB , KC_Q  , KC_W  , KC_F  , KC_P  , KC_G  ,                KC_J  , KC_L  , KC_U  , KC_Y  ,KC_SCLN,KC_BSLS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     RCTRL, A  , R  , S  , T  , D  ,                H  , N  , E  , I  , O  ,QUOT,
+     KC_RIGHT_CTRL, KC_A  , KC_R  , KC_S  , KC_T  , KC_D  ,                KC_H  , KC_N  , KC_E  , KC_I  , KC_O  ,KC_QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LSFT, Z  , X  , C  , V  , B  , SPCFUNMAC ,ENTFUNMAC, K  , M  ,COMM, DOT,SLSH,RSFT,
+     KC_LSFT, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  , KC_SPCFUN ,KC_ENTFUN, KC_K  , KC_M  ,KC_COMM, KC_DOT,KC_SLSH,KC_RSFT,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       TRTT,TLTT,SPCFUNMAC,    ENTFUNMAC,RALT, LGUI
+                       KC_TRTT,KC_TLTT,KC_SPCFUN,    KC_ENTFUN,KC_RIGHT_ALT, KC_LGUI
   //                  `----+----+----'        `----+----+----'
   ),
 
-    [_LOWER] = LAYOUT_kc(
+    [_LOWER] = LAYOUT(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     GRAVE,___, ___, ___, ___, ___,               ___, ___, ___, ___, ___, DEL,
+     KC_GRAVE,_______, _______, _______, _______, _______,               _______, _______, _______, _______, _______, KC_DEL,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___, ___, ___, ___, ___, ___ ,               MINUS,EQUAL,LBRC,RBRC,___,___,
+     _______, _______, _______, _______, _______, _______ ,               KC_MINUS,KC_EQUAL,KC_LBRC,KC_RBRC,_______,_______,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___, ___, ___, ___ ,___, ___,               ___ , ___, ___, ___, ___, ___,
+     _______, _______, _______, _______ ,_______, _______,               _______ , _______, _______, _______, _______, _______,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     ___, ___, ___, ___, ___, ___, ___,       ___,___ , ___, ___, ___, ___, ___,
+     _______, _______, _______, _______, _______, _______, _______,       _______,_______ , _______, _______, _______, _______, _______,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       ___, ___, ___,          ___, ___, ___
+                       _______, _______, _______,          _______, _______, _______
   //                  `----+----+----'        `----+----+----'
   ),
 
-    [_FUNL] = LAYOUT_kc(
+    [_FUNL] = LAYOUT(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ___ , F1 , F2 , F3 , F4 , F5 ,                 F6,  F7,  F8,  F9, F10,PSCR,
+     _______ , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                 KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10,KC_PSCR,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___ ,F11, F12, PGUP, NO, NO ,                  NO,  NO,  UP, NO,  NO, INS,
+     _______ ,KC_F11, KC_F12, KC_PGUP, KC_NO, KC_NO ,                  KC_NO,  KC_NO,  KC_UP, KC_NO,  KC_NO, KC_INS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___,NO,   HOME, PGDN, END,NO,            LEFTWORD,LEFT,DOWN,RGHT,RIGHTWORD,NO,
+     _______,KC_NO,   KC_HOME, KC_PGDN, KC_END,KC_NO,            KC_LEFTWORD,KC_LEFT,KC_DOWN,KC_RGHT,KC_RIGHTWORD,KC_NO,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     ___, ___, ___, ___, ___, ___, ___,       ___,___ , ___, ___, ___, ___, ___,
+     _______, _______, _______, _______, _______, _______, _______,       _______,_______ , _______, _______, _______, _______, _______,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       ___, ___, ___,          ___, ___, ___
+                       _______, _______, _______,          _______, _______, _______
   //                  `----+----+----'        `----+----+----'
   ),
 
-   [_FUNLMAC] = LAYOUT_kc(
-  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ___ , F1 , F2 , F3 , F4 , F5 ,                 F6,  F7,  F8,  F9, F10,PSCR,
+   [_FUNLMAC] = LAYOUT(
+//,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+     _______ , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                 KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10,KC_PSCR,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___ ,F11, F12, PGUP, NO, NO ,                  NO,  NO,  UP, NO,  NO, INS,
+     _______ ,KC_F11, KC_F12, KC_PGUP, KC_NO, KC_NO ,                  KC_NO,  KC_NO,  KC_UP, KC_NO,  KC_NO, KC_INS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___,NO,   HOME, PGDN, END,NO,            LEFTWORDMAC,LEFT,DOWN,RGHT,RIGHTWORDMAC,NO,
+     _______,KC_NO,   KC_HOME, KC_PGDN, KC_END,KC_NO,            KC_LEFTWORDMAC,KC_LEFT,KC_DOWN,KC_RGHT,KC_RIGHTWORDMAC,KC_NO,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     ___, ___, ___, ___, ___, ___, ___,       ___,___ , ___, ___, ___, ___, ___,
+     _______, _______, _______, _______, _______, _______, _______,       _______,_______ , _______, _______, _______, _______, _______,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       ___, ___, ___,          ___, ___, ___
+                       _______, _______, _______,          _______, _______, _______
   //                  `----+----+----'        `----+----+----'
-  ),
+  )
 };
