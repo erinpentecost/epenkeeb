@@ -10,13 +10,14 @@ extern keymap_config_t keymap_config;
 #define _COLEMAK 0
 #define _COLEMAKMAC 1
 #define _LOWER 2
-#define _FUNL 4
-#define _FUNLMAC 8
+#define _FUNL 3
+#define _FUNLMAC 4
 enum custom_keycodes {
   // normal keys, default layer
   COLEMAK = SAFE_RANGE,
   // normal keys for mac mode
-  // get into mac mode by using LSHIFT+RSHIFT+2 (magic command feature)
+  // get into mac mode by using LSHIFT+RSHIFT+1 (magic command feature)
+  // get out by doing LSHIFT+RSHIFT+0.
   COLEMAKMAC,
   // lower layer
   LOWER,
@@ -61,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        KC_TRTT,KC_TLTT,KC_SPCFUN,    KC_ENTFUN,KC_RIGHT_ALT, KC_RIGHT_CTRL
   //                  `----+----+----'        `----+----+----'
   ),
-
+  
   [_COLEMAKMAC] = LAYOUT(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
   KC_ESC, KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_BSPC,
